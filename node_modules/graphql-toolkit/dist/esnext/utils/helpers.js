@@ -1,0 +1,24 @@
+export const asArray = (fns) => (Array.isArray(fns) ? fns : [fns]);
+export function chainFunctions(funcs) {
+    if (funcs.length === 1) {
+        return funcs[0];
+    }
+    return funcs.reduce((a, b) => (...args) => a(b(...args)));
+}
+export function isEqual(a, b) {
+    if (Array.isArray(a) && Array.isArray(b)) {
+        if (a.length !== b.length)
+            return false;
+        for (var index = 0; index < a.length; index++) {
+            if (a[index] !== b[index]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    return a === b || (!a && !b);
+}
+export function isNotEqual(a, b) {
+    return !isEqual(a, b);
+}
+//# sourceMappingURL=helpers.js.map
